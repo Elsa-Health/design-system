@@ -8,7 +8,7 @@ Repository housing the packages containing components and screens that are used 
 
 ## Get Started
 
-This project is a monorepo instantiated with Turborepo. The [`packages`]() contains components and screens packages that are used across the Elsa.Health products and can be used by anyone as well.
+This project is a monorepo instantiated with Turborepo. The [`packages`](./packages/) contains components and screens packages that are used across the Elsa.Health products and can be used by anyone as well.
 
 This projects also uses Storybooks for both components and screens, making it possible to explore and play around the components before using then in your own apps.
 

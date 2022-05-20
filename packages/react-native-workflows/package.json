@@ -26,7 +26,7 @@
     "release": "release-it",
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
-    "clean": "rm -rf node_modules && yarn cache clean && rm -rf ./components ./theme ./visuals tsconfig.tsbuildinfo",
+    "clean": "rm -rf node_modules && yarn cache clean && rm -rf ./helpers ./screens ./screen-groups tsconfig.tsbuildinfo",
     "bootstrap": "yarn example && yarn && yarn pods",
     "storybook-watcher": "sb-rn-watcher --config-path .ondevice",
     "storybook": "start-storybook -p 7007",
