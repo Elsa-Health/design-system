@@ -1,19 +1,19 @@
 /**
  * Section for input components
  */
-import React, {useState} from 'react';
-import {Modal, TextProps, View, ViewProps} from 'react-native';
-import {StyleSheet, Pressable, PressableProps} from 'react-native';
+import React, { useState } from 'react';
+import { Modal, TextProps, View, ViewProps } from 'react-native';
+import { StyleSheet, Pressable, PressableProps } from 'react-native';
 
-import {Text} from './typography';
+import { Text } from './typography';
 import theme from '../theme';
 import {
   TextInputProps as NativeTextInputProps,
   TextInput as NativeTextInput,
 } from 'react-native';
-import {ColorValue} from 'react-native';
-import {RevealContent, SelectableChip} from './misc';
-import {PlusIcon, SearchIcon, XIcon} from '../visuals/vectors';
+import type { ColorValue } from 'react-native';
+import { RevealContent, SelectableChip } from './misc';
+import { PlusIcon, SearchIcon, XIcon } from '../visuals/vectors';
 
 import {
   Picker,
@@ -26,6 +26,10 @@ import produce from 'immer';
  * =====================================
  */
 
+/**
+ *
+ */
+// @ts-ignore
 interface _BaseButtonProps extends PressableProps {
   title?: string;
   textStyle?: TextProps['style'];
@@ -44,14 +48,16 @@ export function _BaseButton({
   return (
     <Pressable
       {...other}
-      android_ripple={{color: '#000', radius: 0, foreground: true}}>
-      {children || (
-          <Text
-            font="bold"
-            style={[{flex: 1, alignItems: 'center'}, textStyle]}>
-            {title}
-          </Text>
-        ) || <></>}
+      android_ripple={{ color: '#000', radius: 0, foreground: true }}
+    >
+      {(
+        <Text
+          font="bold"
+          style={[{ flex: 1, alignItems: 'center' }, textStyle]}
+        >
+          {title}
+        </Text>
+      ) || <>{children}</>}
     </Pressable>
   );
 }
@@ -79,8 +85,10 @@ export function Button({
       {...other}
       style={[
         defaults.button,
+        // @ts-ignore
         buttonStyle,
-        outline ? {borderWidth: 2, borderRadius: 50} : {},
+        outline ? { borderWidth: 2, borderRadius: 50 } : {},
+        // @ts-ignore
         style,
       ]}
       textStyle={[defaults.buttonText, buttonTextStyle]}
@@ -148,8 +156,9 @@ export const buttonStyleMap = (outline: boolean = false) =>
 interface _BaseTextInputProps extends NativeTextInputProps {}
 export const _BaseTextInput = React.forwardRef(
   (props: _BaseTextInputProps, textInputRef) => {
+    // @ts-ignore
     return <NativeTextInput {...props} ref={textInputRef} />;
-  },
+  }
 );
 
 interface TextInputProps extends _BaseTextInputProps {
@@ -165,30 +174,31 @@ export const TextInput = React.forwardRef((props: TextInputProps, ref) => {
    * Focus
    */
   const onFocus = React.useCallback(
-    e => {
+    (e) => {
       setColor(theme.color.primary.base);
       props.onFocus && props.onFocus(e);
     },
-    [props.onFocus],
+    [props.onFocus]
   );
 
   /**
    * Blur
    */
   const onBlur = React.useCallback(
-    e => {
+    (e) => {
       setColor(defaultTextLabelColor);
       props.onBlur && props.onBlur(e);
     },
-    [props.onBlur],
+    [props.onBlur]
   );
 
   return (
     <View
       style={[
-        {position: 'relative', width: 'auto', flex: 1},
+        { position: 'relative', width: 'auto', flex: 1 },
         props.containerStyle,
-      ]}>
+      ]}
+    >
       {props.label && (
         <Text
           font="bold"
@@ -201,20 +211,22 @@ export const TextInput = React.forwardRef((props: TextInputProps, ref) => {
             paddingHorizontal: 4,
             marginTop: 8,
             color: color,
-          }}>
+          }}
+        >
           {props.label}
         </Text>
       )}
       <NativeTextInput
         {...props}
         onFocus={onFocus}
+        // @ts-ignore
         ref={ref}
         onBlur={onBlur}
         testID={props.testID}
         style={[
           defaults.textInput,
           props.label !== undefined ? textStyles.labeled : {},
-          {borderColor: color},
+          { borderColor: color },
           props.style,
         ]}
       />
@@ -235,13 +247,13 @@ export interface SearchInputProps extends TextInputProps {
 export const SearchInput = React.forwardRef<{}, SearchInputProps>(
   (props: SearchInputProps, textInputRef) => {
     const [borderColor, setBorderColor] = React.useState<ColorValue>(
-      defaultTextLabelColor,
+      defaultTextLabelColor
     );
     const [focus, setFocus] = React.useState(false);
 
     // This is useful, but is to be replaced with an icon
     const [placeholder, setPlaceHolder] = React.useState<undefined | 'clear'>(
-      undefined,
+      undefined
     );
 
     React.useEffect(() => {
@@ -262,7 +274,7 @@ export const SearchInput = React.forwardRef<{}, SearchInputProps>(
     /**
      * Focus
      */
-    const onFocus = React.useCallback(e => {
+    const onFocus = React.useCallback((e) => {
       setFocus(true);
       props.onFocus && props.onFocus(e);
     }, []);
@@ -270,7 +282,7 @@ export const SearchInput = React.forwardRef<{}, SearchInputProps>(
     /**
      * Blur
      */
-    const onBlur = React.useCallback(e => {
+    const onBlur = React.useCallback((e) => {
       setFocus(false);
       props.onBlur && props.onBlur(e);
     }, []);
@@ -281,7 +293,8 @@ export const SearchInput = React.forwardRef<{}, SearchInputProps>(
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-        }}>
+        }}
+      >
         <View
           style={{
             flex: 1,
@@ -290,7 +303,8 @@ export const SearchInput = React.forwardRef<{}, SearchInputProps>(
             alignItems: 'center',
             borderBottomWidth: 1,
             borderBottomColor: borderColor,
-          }}>
+          }}
+        >
           <SearchIcon
             width={20}
             height={20}
@@ -308,38 +322,40 @@ export const SearchInput = React.forwardRef<{}, SearchInputProps>(
             onFocus={onFocus}
             onBlur={onBlur}
             placeholder={props.placeholder || 'Search'}
-            style={[defaults.searchTextInput, {paddingLeft: 10}, props.style]}
+            style={[defaults.searchTextInput, { paddingLeft: 10 }, props.style]}
           />
         </View>
         <RevealContent show={placeholder !== undefined}>
           <Pressable
-            style={{alignSelf: 'flex-start'}}
+            style={{ alignSelf: 'flex-start' }}
             onPress={sideButtonAction}
             testID={`search-input-clear${
               props.testID !== undefined ? '-' + props.testID : ''
-            }`}>
+            }`}
+          >
             {placeholder === 'clear' ? (
+              // @ts-ignore
               <XIcon
                 width={20}
                 height={20}
-                style={{color: theme.color.primary.dark}}
+                style={{ color: theme.color.primary.dark }}
               />
             ) : null}
           </Pressable>
         </RevealContent>
       </View>
     );
-  },
+  }
 );
 
-export type VariableValue<T> = {input?: string | undefined; option: T};
+export type VariableValue<T> = { input?: string | undefined; option: T };
 type VariableTextInputProps<T = any> = Omit<
   TextInputProps,
   'value' | 'onChangeText' | 'onChange'
 > & {
   value?: VariableValue<T>;
   onChangeValue?: (value: VariableValue<T>) => void;
-  options: Array<{label: string; value: T}>;
+  options: Array<{ label: string; value: T }>;
 
   /** Styles */
   wrapperStyle?: ViewProps['style'];
@@ -362,37 +378,39 @@ export const VariableTextInput = React.forwardRef(
       onChangeValue,
       ...props
     }: VariableTextInputProps<T>,
-    ref,
+    // @ts-ignore
+    ref
   ) => {
     const [data, set] = useState<VariableValue<T>>(
-      () => value || {input: undefined, option: options[0].value},
+      () => value || { input: undefined, option: options[0].value }
     );
 
     const changeText = React.useCallback(
       (text: string) =>
-        set(s =>
-          produce(s, df => {
+        set((s) =>
+          produce(s, (df) => {
             df['input'] = text;
             return df;
-          }),
+          })
         ),
-      [set],
+      [set]
     );
     const changeOption = React.useCallback(
-      (item: T, ix: number) =>
-        set(s =>
-          produce(s, df => {
+      (item: T) =>
+        set((s) =>
+          produce(s, (df) => {
+            // @ts-ignore
             df['option'] = item;
             return df;
-          }),
+          })
         ),
-      [set],
+      [set]
     );
 
     // Update changes to the onChangeValue function
     React.useEffect(
       () => onChangeValue && onChangeValue(data),
-      [data, onChangeValue],
+      [data, onChangeValue]
     );
 
     return (
@@ -408,33 +426,36 @@ export const VariableTextInput = React.forwardRef(
             borderRadius: 2,
           },
           wrapperStyle,
-        ]}>
+        ]}
+      >
         <_BaseTextInput
           {...props}
           ref={ref}
           value={data.input}
           onChangeText={changeText}
           testID={`${props.testID}-text-input`}
-          style={[layoutStyle.input, fontStyle.normal, {flex: 1}]}
+          style={[layoutStyle.input, fontStyle.normal, { flex: 1 }]}
         />
         <Picker
           style={[
-            {flex: 0.6, borderRadius: 100},
+            { flex: 0.6, borderRadius: 100 },
             fontStyle.normal,
             pickerStyle,
           ]}
           testID={`${props.testID}-picker`}
           itemStyle={[
-            {backgroundColor: 'pink'},
+            { backgroundColor: 'pink' },
             fontStyle.normal,
             pickerItemStyle,
           ]}
           selectedValue={data.option}
-          onValueChange={changeOption}>
+          onValueChange={changeOption}
+        >
           {options.map((s, ix) => (
             <Picker.Item
               {...pickerItemOptionProps}
               style={[fontStyle.normal, {}]}
+              // @ts-ignore
               key={s.value || ix}
               {...s}
               testID={`${props.testID}-picker-item-${ix + 1}`}
@@ -443,7 +464,7 @@ export const VariableTextInput = React.forwardRef(
         </Picker>
       </View>
     );
-  },
+  }
 );
 
 export const fontStyle = StyleSheet.create({
@@ -514,8 +535,8 @@ export type MField<T> = {
     onChangeValue: (value: string) => void;
   }) => JSX.Element;
 };
-type _MultiVisible<T extends string> = {[key in T]: boolean};
-type MultiInputValue<T extends string> = {[key in T]?: string | undefined};
+type _MultiVisible<T extends string> = { [key in T]: boolean };
+type MultiInputValue<T extends string> = { [key in T]?: string | undefined };
 type MultiInputProps<T extends string> = {
   optionsText?: string;
   title: string;
@@ -528,7 +549,7 @@ type MultiInputProps<T extends string> = {
     name: T;
     component: (
       value: string | undefined,
-      onChangeValue: (value: string) => void,
+      onChangeValue: (value: string) => void
     ) => React.ReactNode;
     value: string | undefined;
     onChangeValue: (value: string) => void;
@@ -546,13 +567,16 @@ export function MultiInput<T extends string>({
 }: MultiInputProps<T>) {
   const config = React.useMemo(
     () => normalizeConifiguration(fields, configuration),
-    [fields, configuration],
+    [fields, configuration]
   );
   const [data, set] = useState<MultiInputValue<T>>(initialValue);
+  // @ts-ignore
   const [visible, setVisible] = useState<_MultiVisible<T>>(() => {
     const t = {};
-    fields.forEach(f => {
+    fields.forEach((f) => {
+      // @ts-ignore
       const s = config[f.name];
+      // @ts-ignore
       t[f.name] = s.required ? true : s.show;
     });
     return t;
@@ -567,14 +591,15 @@ export function MultiInput<T extends string>({
   const onChangeComponentValue = React.useCallback(
     (name: T) => (value: string) => {
       console.log('###>', value);
-      set(s =>
-        produce(s, df => {
+      set((s) =>
+        produce(s, (df) => {
+          // @ts-ignore
           df[name] = value;
           return df;
-        }),
+        })
       );
     },
-    [set],
+    [set]
   );
 
   return (
@@ -583,12 +608,14 @@ export function MultiInput<T extends string>({
         animationType="fade"
         transparent
         visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}>
+        onRequestClose={() => setModalVisible(false)}
+      >
         <View
           testID={`${props.testID}-modal-view`}
-          style={multiInputStyles.centeredView}>
+          style={multiInputStyles.centeredView}
+        >
           <View style={multiInputStyles.modalView}>
-            <Text font="bold" style={{textTransform: 'uppercase'}}>
+            <Text font="bold" style={{ textTransform: 'uppercase' }}>
               {optionsText}
             </Text>
             <View
@@ -596,21 +623,24 @@ export function MultiInput<T extends string>({
                 flexDirection: 'row',
                 flexWrap: 'wrap',
                 display: 'flex',
-              }}>
-              {fields.map(({name, label}, ix) => {
+              }}
+            >
+              {fields.map(({ name, label }, ix) => {
                 return (
                   <SelectableChip
                     testID={`${props.testID}-item-option`}
-                    style={{margin: 4}}
+                    style={{ margin: 4 }}
                     selected={visible[name]}
                     key={`${name}-${ix}`}
                     text={label}
                     onChange={() => {
+                      // @ts-ignore
                       if (!config[name].required) {
-                        setVisible(s =>
-                          produce(s, df => {
+                        setVisible((s) =>
+                          produce(s, (df) => {
+                            // @ts-ignore
                             df[name] = !s[name];
-                          }),
+                          })
                         );
                       }
                     }}
@@ -627,33 +657,37 @@ export function MultiInput<T extends string>({
           </View>
         </View>
       </Modal>
-      <View style={[{padding: 4, paddingVertical: 10}, props.style]}>
+      <View style={[{ padding: 4, paddingVertical: 10 }, props.style]}>
         <View
           style={{
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-          }}>
-          <Text font="bold" style={{fontSize: 16}}>
+          }}
+        >
+          <Text font="bold" style={{ fontSize: 16 }}>
             {title}
           </Text>
           <Pressable
             testID={`${props.testID}-add-button`}
-            android_ripple={{borderless: true, radius: 16}}
+            android_ripple={{ borderless: true, radius: 16 }}
             onPress={() => setModalVisible(true)}
-            style={{padding: 4}}>
+            style={{ padding: 4 }}
+          >
             <PlusIcon />
           </Pressable>
         </View>
         <View>
           {fields
-            .filter(p => visible[p.name])
-            .map(({label, name, component: Component}, ix) => (
+            .filter((p) => visible[p.name])
+            .map(({ label, name, component: Component }, ix) => (
               <React.Fragment key={`${label}-${ix}`}>
+                {/* @ts-ignore */}
                 <HouseComponent
                   label={label}
                   name={name}
+                  // @ts-ignore
                   component={Component}
                   value={data[name]}
                   onChangeValue={onChangeComponentValue(name)}
@@ -668,12 +702,13 @@ export function MultiInput<T extends string>({
 
 export function normalizeConifiguration<T extends string>(
   fields: Array<MField<T>>,
-  configuration: MultiInputConfiguration<T>,
+  configuration: MultiInputConfiguration<T>
 ) {
   const s = {};
-  fields.map(({name}) => {
-    const {required = false, show = false} = configuration[name] || {};
-    s[name] = {required, show};
+  fields.map(({ name }) => {
+    const { required = false, show = false } = configuration[name] || {};
+    // @ts-ignore
+    s[name] = { required, show };
   });
 
   return s;

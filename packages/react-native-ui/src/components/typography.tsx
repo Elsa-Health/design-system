@@ -1,6 +1,5 @@
-import React from 'react';
 import styled from 'styled-components/native';
-import {Text as NativeText} from 'react-native';
+import { Text as NativeText } from 'react-native';
 import theme from '../theme';
 
 type FontSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
@@ -30,10 +29,10 @@ export const Text = styled(NativeText)<{
   size?: number | FontSize;
   color?: string;
 }>`
-  color: ${({color}) => color || '#000'};
+  color: ${({ color }) => color || '#000'};
   font-family: ${theme.typography.fontFamilyStyle};
   font-style: normal;
-  font-size: ${({size = 'md'}) => getFontSize(size)};
+  font-size: ${({ size = 'md' }) => getFontSize(size)};
 `;
 
 export const Heading = styled(Text)`

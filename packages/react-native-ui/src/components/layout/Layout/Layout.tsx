@@ -102,6 +102,7 @@ export default function Layout({
                 style={{ padding: 8, marginRight: 10 }}
                 onPress={goBack}
               >
+                {/* @ts-ignore */}
                 <BackIcon style={{ color: theme.color.primary.dark }} />
               </Pressable>
             </RevealContent>
@@ -115,6 +116,7 @@ export default function Layout({
 
           {/* Elsa's logo */}
           <RevealContent show={!hideLogo} style={{ marginRight: 6, flex: 1 }}>
+            {/* @ts-ignore */}
             <ElsaIcon
               style={{ alignSelf: 'flex-end' }}
               width={25}

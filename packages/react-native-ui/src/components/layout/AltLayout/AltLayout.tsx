@@ -47,6 +47,7 @@ export default function AltLayout({
           </RevealContent>
           <Appbar.Content title={title} />
           <RevealContent show={!hideLogo} style={{ paddingHorizontal: 8 }}>
+            {/* @ts-ignore */}
             <ElsaColorableIcon
               color={'#fff'}
               style={{ alignSelf: 'flex-end' }}
@@ -87,6 +88,7 @@ export default function AltLayout({
               style={{ padding: 8, marginRight: 10 }}
               onPress={goBack}
             >
+              {/* @ts-ignore */}
               <BackIcon style={{ color: theme.color.primary.dark }} />
             </Pressable>
           </RevealContent>

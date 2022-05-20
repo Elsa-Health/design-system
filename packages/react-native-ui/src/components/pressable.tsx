@@ -6,11 +6,11 @@ import {
   StyleSheet,
 } from 'react-native';
 
-type PressableProps = {ripple_color?: ColorValue} & Omit<
+type PressableProps = { ripple_color?: ColorValue } & Omit<
   NativePressableProps,
   'android_ripple'
 >;
-export function Pressable({ripple_color, ...props}: PressableProps) {
+export function Pressable({ ripple_color, ...props }: PressableProps) {
   return (
     <NativePressable
       android_ripple={{
@@ -22,6 +22,7 @@ export function Pressable({ripple_color, ...props}: PressableProps) {
       style={[
         pressableStyle.container,
         pressableStyle.button,
+        // @ts-ignore
         props.style || {},
       ]}
     />

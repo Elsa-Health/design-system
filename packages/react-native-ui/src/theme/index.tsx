@@ -1,8 +1,8 @@
 import React from 'react';
-import {Provider as PaperProvider} from 'react-native-paper';
+import { Provider as PaperProvider } from 'react-native-paper';
 import rnpTheme from './rnp';
 
-import {DefaultColor, DefaultTypography, DefaultSpacing} from './default';
+import { DefaultColor, DefaultTypography, DefaultSpacing } from './default';
 type ThemeConfig = {
   contentType: 'white' | 'colored';
   color: typeof DefaultColor;
@@ -34,6 +34,7 @@ export function ThemeProvider({
 }) {
   return (
     <ThemeContext.Provider value={theme ? theme(DefaultTheme) : DefaultTheme}>
+      {/* @ts-ignore */}
       <PaperProvider theme={rnpTheme}>{children}</PaperProvider>
     </ThemeContext.Provider>
   );
@@ -43,4 +44,4 @@ export function useTheme() {
   return React.useContext(ThemeContext);
 }
 
-export {DefaultColor, DefaultSpacing, DefaultTypography} from './default';
+export { DefaultColor, DefaultSpacing, DefaultTypography } from './default';

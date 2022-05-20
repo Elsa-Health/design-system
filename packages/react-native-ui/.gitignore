@@ -60,10 +60,11 @@ android/keystores/debug.keystore
 # Expo
 .expo/*
 
-./lib/
-./components/
-./theme/
-./visuals/
+components/
+theme/
+visuals/
+
+!src/
 
 # storybook
 storybook-static

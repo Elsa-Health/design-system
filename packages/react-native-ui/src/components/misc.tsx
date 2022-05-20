@@ -1,18 +1,12 @@
 import React from 'react';
-import {TextProps, ViewProps} from 'react-native';
-import {Pressable, PressableProps, StyleSheet, View} from 'react-native';
+import type { TextProps, ViewProps } from 'react-native';
+import { Pressable, PressableProps, StyleSheet, View } from 'react-native';
 import SectionedMultiSelect, {
   SectionedMultiSelectProps,
 } from 'react-native-sectioned-multi-select';
-import {
-  CheckCircleIcon,
-  ChevronDownIcon,
-  MenuAltIcon,
-  SearchIcon,
-  XIcon,
-} from '../visuals/vectors';
+import { XIcon } from '../visuals/vectors';
 import theme from '../theme';
-import {Text} from './typography';
+import { Text } from './typography';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -20,16 +14,19 @@ type ChipProps = PressableProps & {
   text?: string;
   textStyle?: TextProps['style'];
 };
-export function Chip({text, children, style, ...other}: ChipProps) {
+export function Chip({ text, children, style, ...other }: ChipProps) {
   return (
     <Pressable
-      android_ripple={{radius: 20, color: theme.color.secondary.light}}
+      android_ripple={{ radius: 20, color: theme.color.secondary.light }}
+      // @ts-ignore
       style={[chipStyles.default, style]}
-      {...other}>
+      {...other}
+    >
       {children || (
         <Text
           font="medium"
-          style={[{fontSize: 15, textAlign: 'center'}, other.textStyle]}>
+          style={[{ fontSize: 15, textAlign: 'center' }, other.textStyle]}
+        >
           {text || ''}
         </Text>
       )}
@@ -52,16 +49,17 @@ export function SelectableChip({
   // }, [selected])
 
   const _onPressChip = React.useCallback(
-    e => {
+    (e) => {
       onChange && onChange(selected);
       onPress && onPress(e);
     },
-    [selected],
+    [selected]
   );
 
   return (
     <Chip
       {...other}
+      // @ts-ignore
       style={[selected ? chipStyles.selected : {}, other.style]}
       textStyle={[selected ? chipStyles.selectedText : {}, other.textStyle]}
       // NOTE: you might want to remove this here
@@ -115,6 +113,7 @@ export function RevealContent({
 
   return (
     <React.Fragment>
+      {/* @ts-ignore */}
       <View style={style}>{children}</View>
     </React.Fragment>
   );
@@ -123,6 +122,7 @@ export function RevealContent({
 export const iconToggle = (name: string, style: object = {}) => {
   if (name === 'close') {
     return (
+      // @ts-ignore
       <XIcon
         style={{
           color: theme.color.secondary.base,
@@ -136,31 +136,32 @@ export const iconToggle = (name: string, style: object = {}) => {
       <Icon
         name="check-circle-outline"
         size={24}
-        style={[style, {marginRight: 4}]}
+        style={[style, { marginRight: 4 }]}
       />
     );
-    return <CheckCircleIcon style={style} />;
+    // return <CheckCircleIcon style={style} />;
   }
   if (name === 'search') {
     return <Icon name="magnify" size={24} style={style} />;
-    return <SearchIcon style={style} />;
+    // return <SearchIcon style={style} />;
   }
   if (name === 'keyboard-arrow-down') {
     return (
       <Icon name="chevron-down" size={24} color={theme.color.secondary.base} />
     );
-    return <ChevronDownIcon style={style} />;
+    // return <ChevronDownIcon style={style} />;
   }
   return null;
 };
 
 export function SectionedSelect<T>(
-  props: Omit<SectionedMultiSelectProps<T>, 'styles' | 'IconRenderer'>,
+  props: Omit<SectionedMultiSelectProps<T>, 'styles' | 'IconRenderer'>
 ) {
   return (
     <SectionedMultiSelect
       // items={searchableConditions}
-      IconRenderer={(props: {name: string; style: object}) =>
+      // @ts-ignore
+      IconRenderer={(props: { name: string; style: object }) =>
         iconToggle(props.name, props.style)
       }
       subKey="children"
@@ -185,7 +186,7 @@ export function SectionedSelect<T>(
           fontFamily: theme.typography.fontFamilyStyle(),
           color: theme.color.primary.dark,
         },
-        selectedItem: {backgroundColor: `#CCCCCC55`},
+        selectedItem: { backgroundColor: `#CCCCCC55` },
         itemText: {
           fontFamily: theme.typography.fontFamilyStyle({
             font: 'bold',
@@ -213,13 +214,13 @@ export function SectionedSelect<T>(
           fontSize: 14,
           color: theme.color.secondary.dark,
         },
-        chipContainer: [chipStyles.default, {paddingHorizontal: 6}],
+        chipContainer: [chipStyles.default, { paddingHorizontal: 6 }],
         confirmText: {
           fontFamily: theme.typography.fontFamilyStyle({
             font: 'bold',
           }),
         },
-        chipIcon: {borderRadius: 100, padding: 14},
+        chipIcon: { borderRadius: 100, padding: 14 },
       }}
     />
   );
@@ -241,14 +242,14 @@ export function Picker<T>(props: {
         {
           name: props.label || 'Items',
           id: 0,
-          children: props.items.map(item => ({
+          children: props.items.map((item) => ({
             id: props.uniqueKey ? props.uniqueKey(item) : item,
             name: props.renderText ? props.renderText(item) : item,
           })),
         },
       ]}
       uniqueKey="id"
-      onSelectedItemsChange={items => {
+      onSelectedItemsChange={(items) => {
         // console.log('==>', items);
         props.onChangeValue?.(items[0]);
       }}

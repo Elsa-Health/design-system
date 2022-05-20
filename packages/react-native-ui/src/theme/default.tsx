@@ -7,7 +7,7 @@ export type fontFamiliStyleType =
   | 'extra-black';
 
 export const fontFamilyStyle = (
-  props: {italic?: boolean; font?: fontFamiliStyleType} = {},
+  props: { italic?: boolean; font?: fontFamiliStyleType } = {}
 ) => {
   if (props.italic !== undefined) {
     if (props.italic) {
@@ -54,8 +54,10 @@ export const DefaultColor = {
     base: '#4665AF',
     light: '#7992e1',
     dark: '#003b7f',
+    text: '#FFF',
   },
   secondary: {
+    text: '#000',
     base: '#5558A6',
     light: '#8685d8',
     dark: '#222f77', // can change in the future
@@ -63,22 +65,22 @@ export const DefaultColor = {
 };
 
 export const DefaultSpacing = {
-  xs: 4,
-  sm: 8,
-  md: 16,
-  lg: 24,
-  xl: 32,
+  'xs': 4,
+  'sm': 8,
+  'md': 16,
+  'lg': 24,
+  'xl': 32,
   '2xl': 48,
 };
 
 export const DefaultTypography = {
   fontFamilyStyle,
   sizes: {
-    xs: '12px',
-    sm: '14px',
-    md: '16px',
-    lg: '20px',
-    xl: '24px',
+    'xs': '12px',
+    'sm': '14px',
+    'md': '16px',
+    'lg': '20px',
+    'xl': '24px',
     '2xl': '28px',
   },
 };
