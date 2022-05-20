@@ -30,7 +30,8 @@
     "bootstrap": "yarn example && yarn && yarn pods",
     "storybook-watcher": "sb-rn-watcher --config-path .ondevice",
     "storybook": "start-storybook -p 7007",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "build-site": "yarn build-storybook"
   },
   "keywords": [
     "react-native",

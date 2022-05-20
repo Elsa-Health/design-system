@@ -1,7 +1,6 @@
 {
 	"pipeline": {
-		"site:build": {
-			"dependsOn": ["^build", "^build-storybook"],
+		"build-site": {
 			"outputs": ["storybook-static/**", ".next/**"]
 		},
 		"lint": {
