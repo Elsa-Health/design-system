@@ -3,6 +3,10 @@
 		"build-site": {
 			"outputs": ["storybook-static/**", ".next/**"]
 		},
+		"clean": {
+			"outputs": [],
+			"cache": false
+		},
 		"lint": {
 			"outputs": []
 		},
