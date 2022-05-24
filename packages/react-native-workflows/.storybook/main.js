@@ -8,11 +8,12 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-react-native-web',
 
-    // on device addons
-    '@storybook/addon-ondevice-notes',
-    '@storybook/addon-ondevice-controls',
-    '@storybook/addon-ondevice-backgrounds',
-    '@storybook/addon-ondevice-actions',
+    // Buggy addons. Should send issue to storybook@github
+    // -----------------------
+    // '@storybook/addon-ondevice-notes',
+    // '@storybook/addon-ondevice-controls',
+    // '@storybook/addon-ondevice-backgrounds',
+    // '@storybook/addon-ondevice-actions',
   ],
   framework: '@storybook/react',
 };

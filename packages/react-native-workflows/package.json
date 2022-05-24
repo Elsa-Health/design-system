@@ -61,8 +61,6 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@react-native-async-storage/async-storage": "^1.17.3",
     "@react-native-community/slider": "^4.2.2",
-    "@react-navigation/native": "^6.0.10",
-    "@react-navigation/native-stack": "^6.6.2",
     "@release-it/conventional-changelog": "^2.0.0",
     "@storybook/addon-actions": "6.3",
     "@storybook/addon-controls": "6.3",
@@ -81,6 +79,7 @@
     "@storybook/testing-library": "^0.0.9",
     "@storybook/theming": "^6.5.3",
     "@testing-library/react-native": "^9.1.0",
+    "@types/i18next": "^13.0.0",
     "@types/react": "^17.0.31",
     "@types/react-native": "^0.66.0",
     "@types/styled-components": "^5.1.24",
@@ -110,12 +109,11 @@
     "typescript": "^4.4.0"
   },
   "peerDependencies": {
-    "@react-navigation/native": "*",
-    "@react-navigation/native-stack": "*",
     "react": "*",
     "react-native": "*",
     "react-native-paper": "*",
     "react-native-svg": "*",
+    "@elsa-health/react-native": "0.1.0",
     "styled-components": "*"
   },
   "jest": {
@@ -196,13 +194,13 @@
     ]
   },
   "dependencies": {
-    "@elsa-ui/react-native": "^0.1.0",
-    "@react-native-picker/picker": "^2.4.0",
     "elsa-health-data-fns": "^1.5.8",
+    "@elsa-ui/react-native": "^0.1.0",
+    "@react-navigation/native": "^6.0.10",
+    "@react-navigation/native-stack": "^6.6.2",
+    "i18next": "^21.8.3",
     "immer": "^9.0.12",
     "react-i18next": "^11.16.9",
-    "react-native-safe-area-context": "^4.2.4",
-    "react-native-sectioned-multi-select": "^0.9.1",
     "zustand": "^3.6.0"
   }
 }

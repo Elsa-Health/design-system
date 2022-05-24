@@ -1,4 +1,4 @@
-import type * as data from '../../@libs/data-fns';
+import type * as data from 'elsa-health-data-fns';
 
 /**
  * Sypmtom ids
