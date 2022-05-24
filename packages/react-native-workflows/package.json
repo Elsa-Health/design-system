@@ -113,7 +113,6 @@
     "react-native": "*",
     "react-native-paper": "*",
     "react-native-svg": "*",
-    "@elsa-health/react-native": "0.1.0",
     "styled-components": "*"
   },
   "jest": {
@@ -195,7 +194,7 @@
   },
   "dependencies": {
     "elsa-health-data-fns": "^1.5.8",
-    "@elsa-ui/react-native": "^0.1.0",
+    "@elsa-ui/react-native": "latest",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.2",
     "i18next": "^21.8.3",
