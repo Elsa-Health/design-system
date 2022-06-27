@@ -1,6 +1,6 @@
 {
   "name": "@elsa-ui/react-native-workflows",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Elsa.Health React Native UI Library",
   "react-native": "src/index",
   "source": "src/index",
