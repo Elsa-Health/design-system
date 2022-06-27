@@ -1,16 +1,20 @@
 import React from 'react';
-import { Pressable, StatusBar, View, ViewProps } from 'react-native';
 import {
+  Pressable,
+  StatusBar,
+  View,
+  ViewProps,
   SafeAreaView,
-  SafeAreaViewProps,
-} from 'react-native-safe-area-context';
+  ScrollView,
+} from 'react-native';
+
 import { ElsaIcon, ArrowBackIcon } from '../../../visuals/vectors';
 import theme, { DefaultSpacing } from '../../../theme';
 import { RevealContent } from '../../misc';
 import { Heading } from '../../typography';
 
 export type LayoutProps = {
-  wrapperStyle?: SafeAreaViewProps['style'];
+  wrapperStyle?: ViewProps['style'];
   headerStyle?: ViewProps['style'];
   navigation?: any | undefined;
   title?: string;
@@ -19,6 +23,8 @@ export type LayoutProps = {
    * Overrides and forcefully hides the go back button
    */
   hideGoBack?: boolean;
+
+  scrollable?: boolean;
 
   /**
    * Hides header
@@ -38,6 +44,7 @@ export default function Layout({
   hideLogo = false,
   navigation,
   title,
+  scrollable = false,
   wrapperStyle,
   headerStyle,
   backIcon: BackIcon = ArrowBackIcon,
@@ -136,19 +143,31 @@ export default function Layout({
         ></View>
       </RevealContent>
       {/* child component */}
-      <View
-        {...viewProps}
-        testID={testID}
-        style={[
-          {
-            flex: 1,
-            padding: DefaultSpacing.md,
-            paddingTop: 8,
-            backgroundColor: '#FFF',
-          },
-          viewProps.style,
-        ]}
-      />
+      {scrollable ? (
+        <ScrollView
+          contentContainerStyle={[
+            {
+              padding: DefaultSpacing.md,
+              paddingTop: 8,
+              backgroundColor: '#FFF',
+            },
+            viewProps.style,
+          ]}
+        />
+      ) : (
+        <View
+          {...viewProps}
+          testID={testID}
+          style={[
+            {
+              flex: 1,
+              padding: DefaultSpacing.md,
+              backgroundColor: '#FFF',
+            },
+            viewProps.style,
+          ]}
+        />
+      )}
     </SafeAreaView>
   );
 }

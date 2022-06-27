@@ -63,11 +63,18 @@ android/keystores/debug.keystore
 # build output
 helpers/
 screen-groups/
-screens
+screens/
 @types/
+utilities/
+public-types/
+
+tsconfig.tsbuildinfo
+index.d.ts
+index.js
+index.js.map
 
 # reserve the code-base
-!src/
+!src/**
 
 # storybookX
 storybook-static/

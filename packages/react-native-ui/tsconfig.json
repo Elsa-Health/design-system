@@ -6,7 +6,7 @@
     "composite": true,
     "importsNotUsedAsValues": "error",
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-native",
+    "jsx": "preserve",
     "lib": ["esnext"],
     "module": "esnext",
     "moduleResolution": "node",

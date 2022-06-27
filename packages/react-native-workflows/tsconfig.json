@@ -6,16 +6,16 @@
     "composite": true,
     "importsNotUsedAsValues": "error",
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-native",
+    "jsx": "preserve",
     "lib": ["esnext"],
     "module": "esnext",
     "moduleResolution": "node",
 
     "noEmit": false,
     "declaration": true,
-    "emitDeclarationOnly": true,
+    "declarationMap": false,
     "declarationDir": "./",
-    "allowJs": true,
+    "emitDeclarationOnly": true,
     "outDir": "./dist",
     "rootDir": "./src",
 
@@ -30,6 +30,11 @@
     "strict": true,
     "target": "esnext"
   },
-  "exclude": ["**/__tests__/**/*", "**/*.test.tsx", "**/*.test.js"],
+  "exclude": [
+    "**/__tests__/**/*",
+    "**/*.test.tsx",
+    "**/*.test.ts",
+    "**/*.test.js"
+  ],
   "include": ["./src/**/*"]
 }

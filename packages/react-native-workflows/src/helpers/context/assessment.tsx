@@ -12,7 +12,7 @@ import type {
   Differential,
   SymptomData,
   SymptomRecord,
-} from '../../@types/health';
+} from '../../public-types/health';
 
 export const ELSA_LAMBDA_API_URL =
   'https://elsalambdaserver-ot7ufctkoq-ew.a.run.app/api';
@@ -124,6 +124,7 @@ export function SymptomAssessmentSequenceProvider(props: {
 }) {
   return (
     <Provider createStore={builderStoreCreator(props.initialState || {})}>
+      {/* @ts-ignore */}
       {props.children}
     </Provider>
   );
@@ -367,7 +368,7 @@ export const getConditionData = (
   };
 };
 
-export const convertPatientForElsa = (patient: PatientIntake) =>
+export const convertPatientForElsa = (patient: any) =>
   produce({} as { age: number; sex: 'male' | 'female' }, (df) => {
     if (patient.age?.years !== undefined || patient.age?.months !== undefined) {
       df['age'] = getAge(patient.age.years || 0, patient.age.months || 0);

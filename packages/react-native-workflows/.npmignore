@@ -1,11 +1,15 @@
 .husky
 .circleci
+.turbo
 
 example/
 node_modules/
 scripts/
+.storybook/
 
 src/
 tsconfig.build.json
+babel.config.js
 tsconfig.json
 yarn.lock
+tsconfig.tsbuildinfo

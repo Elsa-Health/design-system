@@ -1,6 +1,6 @@
-import {concat, first} from 'lodash';
-import {Symptom} from '../../@libs/data-fns';
-import {symptoms} from './symptoms';
+import { concat, first } from 'lodash';
+import type { Symptom } from 'elsa-health-data-fns';
+import { symptoms } from './symptoms';
 
 // copy(responses.map(r => r.symptoms.map(s => s.Name)).filter(a => a.length > 0)
 const symptomMatrix: Array2D<Symptom> = [
@@ -100,7 +100,7 @@ export function snd(l: any[] = []) {
  * @returns {Record<string, number>}
  */
 export function countBy(l: Array<string>): Record<string, number> {
-  return l.reduce((acc, value) => {
+  return l.reduce((acc: any, value) => {
     if (!acc[value]) {
       acc[value] = 1;
     } else {
@@ -115,53 +115,53 @@ export function countBy(l: Array<string>): Record<string, number> {
  * @param l
  * @returns {Record<string, number>}
  */
-export function weirdFunction(a: [string, number], b: [string, number]) {
+function weirdFunction(a: [string, number], b: [string, number]) {
   return snd(b) - snd(a);
 }
 
 // properly format the symptoms to those that exists in the symptoms list
-const all_symptoms = symptoms.map(s => s.id);
-const existingSymptomsMatrix = symptomMatrix.map(s =>
-  s.filter(x => all_symptoms.includes(x)),
+const all_symptoms = symptoms.map((s) => s.id) as string[];
+const existingSymptomsMatrix = symptomMatrix.map((s) =>
+  s.filter((x) => all_symptoms.includes(x as string))
 );
 
 export const getAssocSymptomRecords = (
   presentSymptom: Symptom[],
   absentSymptoms: Symptom[],
-  count: number = 3,
+  count: number = 3
 ) => {
   return getAssocSym(
     existingSymptomsMatrix,
     presentSymptom,
     absentSymptoms,
-    count,
-  ).filter(s => all_symptoms.includes(s));
+    count
+  ).filter((s) => all_symptoms.includes(s as string));
 };
 
 const getAssocSym = (
   symptomMatrix: Array2D<Symptom>,
   present: Symptom[],
   absent: Symptom[],
-  count: number = 3,
+  count: number = 3
 ) => {
   // filter out those in absent
   const remainingAfterAbsent = symptomMatrix.filter(
-    row => !row.some(s => absent.includes(s)),
+    (row) => !row.some((s) => absent.includes(s))
   );
-  const inPresent = symptomMatrix.filter(row =>
-    row.some(s => present.includes(s)),
+  const inPresent = symptomMatrix.filter((row) =>
+    row.some((s) => present.includes(s))
   );
 
   const final = concat(
     inPresent.reduce((acc, curr) => {
-      curr.map(item => acc.push(item));
+      curr.map((item) => acc.push(item));
       return acc;
     }, []),
     remainingAfterAbsent.reduce((acc, curr) => {
-      curr.map(item => acc.push(item));
+      curr.map((item) => acc.push(item));
       return acc;
-    }, []),
-  ).filter(s => !present.includes(s));
+    }, [])
+  ).filter((s) => !present.includes(s));
   // Merge the two
   // const final = [
   // 	...,
@@ -171,7 +171,7 @@ const getAssocSym = (
   // 	}, []),
   // ].filter((s) => !present.includes(s));
 
-  const symptomRanks = countBy(final);
+  const symptomRanks = countBy(final as string[]);
   return Object.entries(symptomRanks)
     .sort(weirdFunction)
     .slice(0, count)

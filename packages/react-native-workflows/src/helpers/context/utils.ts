@@ -5,7 +5,7 @@ import type {
   Symptom,
   SymptomData,
   SymptomRecord,
-} from '../../@types/health';
+} from '../../public-types/health';
 import { useWindowDimensions } from 'react-native';
 import React from 'react';
 
@@ -61,62 +61,6 @@ export const properAgeString = (age_: Age) => {
 };
 
 /**
- * Login information
- */
-
-type FieldName =
-  | 'version'
-  | 'id'
-  | 'firstName'
-  | 'lastName'
-  | 'role'
-  | 'telephone'
-  | 'facilityName'
-  | 'city'
-  | 'facilityId';
-
-// Exported for tests
-const fieldNames: FieldName[] = [
-  'version',
-  'id',
-  'firstName',
-  'lastName',
-  'role',
-  'telephone',
-  'facilityName',
-  'city',
-  'facilityId',
-];
-
-export type AuthInfoMap = { [key in FieldName]: string };
-export const ERROR_MESSAGE = 'Please scan a valid QR code';
-
-export function authenticate(data: string): Promise<AuthInfoMap> {
-  return new Promise((resolve, reject) => {
-    try {
-      const QRInfo = data.split('|');
-      const info = _.zipObject(fieldNames, QRInfo) as AuthInfoMap;
-      // console.log(data);
-      if (
-        Array.isArray(QRInfo) &&
-        QRInfo.length === fieldNames.length &&
-        info.facilityName &&
-        info.version &&
-        info.facilityId
-      ) {
-        // NEXT: get the GPS location of the user at the moment of sign in.
-        resolve(info);
-      }
-
-      throw new Error(ERROR_MESSAGE);
-    } catch (err) {
-      // reject with the message
-      reject(err);
-    }
-  });
-}
-
-/**
  * React native component
  */
 
@@ -130,7 +74,7 @@ const ELSA_DEVICE_USABLE_WIDTH = 350;
 const isWidthConditionMet = (width: number) =>
   width / 3 > ELSA_DEVICE_USABLE_WIDTH;
 export function useDeviceBreak() {
-  const { width, height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   /**
    * Break off at a point of a device when conditions are met

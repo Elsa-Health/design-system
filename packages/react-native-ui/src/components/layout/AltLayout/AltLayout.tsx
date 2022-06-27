@@ -1,6 +1,5 @@
 import React from 'react';
-import { Pressable, StatusBar, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Pressable, StatusBar, View, SafeAreaView } from 'react-native';
 import { ElsaColorableIcon, ArrowBackIcon } from '../../../visuals/vectors';
 import theme, { DefaultSpacing, DefaultColor } from '../../../theme';
 import { RevealContent } from '../../misc';
@@ -114,7 +113,6 @@ export default function AltLayout({
           {
             flex: 1,
             padding: DefaultSpacing.md,
-            paddingTop: 8,
             backgroundColor: '#FFF',
           },
           viewProps.style,

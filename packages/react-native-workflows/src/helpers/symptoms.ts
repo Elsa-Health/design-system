@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { SymptomDescription } from '../@types/health';
+import type { SymptomDescription } from '../public-types/health';
 import { TFunction, useTranslation } from 'react-i18next';
 
 import {
@@ -26,7 +26,7 @@ function getCondition(
 
 export const getSymptomLocalFunction =
   (t: TFunction) => (symptomId: Symptom) => {
-    const obj: { description: string; name: string } = t(symptomId, {
+    const obj: { description: string; name: string } = t(symptomId as string, {
       returnObjects: true,
       defaultValue: undefined,
     });
